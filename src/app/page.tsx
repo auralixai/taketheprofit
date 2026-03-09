@@ -94,15 +94,15 @@ export default function HomePage() {
                <div className="flex-1 text-left space-y-4">
                   <div className="flex items-center gap-3 text-gray-300">
                     <CheckCircle2 className="text-[#00FF66] w-5 h-5" />
-                    <span>Free pSEO Strategy Library</span>
+                    <span>Comprehensive Strategy Library</span>
                   </div>
                   <div className="flex items-center gap-3 text-gray-300">
                     <CheckCircle2 className="text-[#00FF66] w-5 h-5" />
-                    <span>Basic AI Exit Backtesting</span>
+                    <span>Real-time AI Exit Backtesting</span>
                   </div>
                   <div className="flex items-center gap-3 text-gray-300">
                     <CheckCircle2 className="text-[#00FF66] w-5 h-5" />
-                    <span>Real-time Premium Signals</span>
+                    <span>Premium Signal Dashboard</span>
                   </div>
                </div>
                <div className="flex-1 bg-white/5 p-6 rounded-2xl border border-white/10 text-center">
