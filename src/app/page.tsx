@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { TrendingUp, Target, ShieldAlert, BarChart3, Zap, BrainCircuit, Globe, LayoutDashboard, Wallet, ChevronRight, CheckCircle2 } from "lucide-react";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Take The Profit | AI Trade Exit Agent",
@@ -18,28 +19,10 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-[#0A0B0D] text-white selection:bg-[#00FF66]/30">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-[#0A0B0D]/80 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-[#00FF66] rounded flex items-center justify-center">
-              <TrendingUp className="text-black w-5 h-5" />
-            </div>
-            <span className="font-bold text-xl tracking-tight">TakeTheProfit</span>
-          </div>
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
-            <a href="/library" className="hover:text-[#00FF66] transition-colors">Library</a>
-            <a href="/signals" className="hover:text-[#00FF66] transition-colors">Signals</a>
-            <a href="/pricing" className="hover:text-[#00FF66] transition-colors">Pricing</a>
-            <a href="/agent" className="bg-white/5 px-4 py-2 rounded-lg border border-white/10 text-white hover:bg-white/10 transition-colors">Launch Agent</a>
-          </div>
-        </div>
-      </nav>
-
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4">
         <div className="max-w-7xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00FF66]/10 border border-[#00FF66]/20 text-[#00FF66] text-xs font-bold mb-8 animate-pulse">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00FF66]/10 border border-[#00FF66]/20 text-[#00FF66] text-xs font-bold mb-8 animate-pulse uppercase tracking-widest">
             <BrainCircuit className="w-3.5 h-3.5" />
             AI EXIT AGENT V1.0 LIVE
           </div>
@@ -50,12 +33,12 @@ export default function HomePage() {
             Eliminate emotional bias and greed. TakeTheProfit uses AI to calculate precise exit points based on market volatility, psychological triggers, and historical win rates.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button className="w-full sm:w-auto px-8 py-4 bg-[#00FF66] text-black font-bold rounded-xl hover:shadow-[0_0_20px_rgba(0,255,102,0.4)] transition-all flex items-center justify-center gap-2 group">
-              Get Started for Free <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button className="w-full sm:w-auto px-8 py-4 bg-white/5 border border-white/10 text-white font-bold rounded-xl hover:bg-white/10 transition-all">
+            <Link href="/agent" className="w-full sm:w-auto px-8 py-4 bg-[#00FF66] text-black font-bold rounded-xl hover:shadow-[0_0_20px_rgba(0,255,102,0.4)] transition-all flex items-center justify-center gap-2 group">
+              Launch Exit Agent <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
+            <Link href="/library" className="w-full sm:w-auto px-8 py-4 bg-white/5 border border-white/10 text-white font-bold rounded-xl hover:bg-white/10 transition-all text-center">
               View Strategy Library
-            </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -124,7 +107,7 @@ export default function HomePage() {
                </div>
                <div className="flex-1 bg-white/5 p-6 rounded-2xl border border-white/10 text-center">
                   <span className="text-sm text-gray-400 uppercase tracking-widest font-bold">Premium Access</span>
-                  <div className="text-4xl font-bold mt-2 mb-4">$49<span className="text-lg text-gray-500 font-normal">/mo</span></div>
+                  <div className="text-4xl font-bold mt-2 mb-4 tracking-tighter">$49<span className="text-lg text-gray-500 font-normal">/mo</span></div>
                   <button className="w-full py-3 bg-white text-black font-bold rounded-lg hover:bg-[#00FF66] transition-colors">Start Free Trial</button>
                </div>
             </div>
