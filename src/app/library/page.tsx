@@ -1,7 +1,9 @@
 import { Target, Search, Filter, ShieldAlert, BarChart3, TrendingUp, Zap, ChevronRight, Calculator, CheckCircle2 } from "lucide-react";
+import Link from "next/link";
 
 const STRATEGIES = [
   {
+    slug: "rsi-divergence-exit",
     title: "RSI Divergence Exit",
     description: "Exit when price makes a higher high but RSI makes a lower high.",
     winRate: "68%",
@@ -10,6 +12,7 @@ const STRATEGIES = [
     asset: "Universal",
   },
   {
+    slug: "atr-trailing-stop",
     title: "ATR Trailing Stop",
     description: "Dynamic exit based on average true range volatility.",
     winRate: "74%",
@@ -18,6 +21,7 @@ const STRATEGIES = [
     asset: "Forex/Indices",
   },
   {
+    slug: "fibonacci-level-exhaustion",
     title: "Fibonacci Level Exhaustion",
     description: "Automated exit at 1.618 and 2.618 extensions.",
     winRate: "62%",
@@ -26,6 +30,7 @@ const STRATEGIES = [
     asset: "Stocks/Crypto",
   },
   {
+    slug: "time-based-liquidity-exit",
     title: "Time-Based Liquidity Exit",
     description: "Exit before the NY Open or London Close volatility spike.",
     winRate: "59%",
@@ -68,7 +73,11 @@ export default function LibraryPage() {
         {/* Strategy Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {STRATEGIES.map((strat, i) => (
-            <div key={i} className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-[#00FF66]/30 transition-all flex flex-col group relative overflow-hidden">
+            <Link 
+              key={i} 
+              href={`/library/${strat.slug}`}
+              className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-[#00FF66]/30 transition-all flex flex-col group relative overflow-hidden"
+            >
               {strat.premium && (
                 <div className="absolute top-0 right-0 p-2">
                   <div className="bg-[#00FF66]/10 border border-[#00FF66]/20 text-[#00FF66] text-[8px] font-black tracking-widest px-2 py-0.5 rounded uppercase">Premium</div>
@@ -96,11 +105,11 @@ export default function LibraryPage() {
                       style={{ width: strat.winRate }}
                     ></div>
                  </div>
-                 <button className="w-full py-2.5 bg-white/5 hover:bg-[#00FF66] hover:text-black transition-all rounded-lg text-xs font-bold flex items-center justify-center gap-2">
+                 <div className="w-full py-2.5 bg-white/5 group-hover:bg-[#00FF66] group-hover:text-black transition-all rounded-lg text-xs font-bold flex items-center justify-center gap-2">
                    {strat.premium ? "Unlock with Premium" : "Load into Agent"} <ChevronRight className="w-3 h-3" />
-                 </button>
+                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
