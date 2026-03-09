@@ -131,8 +131,114 @@ const STRATEGIES_DATA: any = {
     ],
     psychology: "Provides a purely mechanical exit, silencing the 'hope' of a bounce when the trend has clearly flipped.",
     stats: { avgProfit: "+11.8%", drawdown: "-2.9%", volatility: "Medium-High" }
+  },
+  "moving-average-cross-swing": {
+    title: "Moving Average Cross Swing",
+    description: "The 9-21 EMA cross is a classic swing trading exit. It captures the bulk of a multi-day move while exiting before a significant trend reversal.",
+    winRate: "65%",
+    category: "Equity",
+    asset: "Blue-chip Stocks / Indices",
+    logic: [
+      "Wait for 9 EMA to cross below the 21 EMA.",
+      "Identify the first candle close below the cross level.",
+      "Exit 100% on the following candle open.",
+      "Wait for a new golden cross to re-enter."
+    ],
+    psychology: "Removes the guesswork of trend following by using an objective crossing signal.",
+    stats: { avgProfit: "+6.4%", drawdown: "-1.5%", volatility: "Low" }
+  },
+  "earnings-run-up-exit": {
+    title: "Earnings Run-up Exit",
+    description: "Avoid the volatility of an earnings report by selling into the anticipated price run-up 24 to 48 hours before the announcement.",
+    winRate: "72%",
+    category: "Stocks",
+    asset: "Tech / Mega-Cap Growth",
+    logic: [
+      "Identify upcoming earnings date.",
+      "Calculate 5-day average volume during the run-up.",
+      "Set an exit 48 hours prior to market close of the earnings day.",
+      "Profit from the anticipation, not the report itself."
+    ],
+    psychology: "Prevents gambling on binary outcomes and locks in consistent run-up gains.",
+    stats: { avgProfit: "+4.1%", drawdown: "0% (No post-earnings gap)", volatility: "High (Run-up only)" }
+  },
+  "options-delta-target": {
+    title: "Options Delta Target",
+    description: "Delta-based exits are the most precise way to manage risk in options trading. As your contract moves deeper in-the-money (ITM), the delta increase signals potential plateauing gamma.",
+    winRate: "61%",
+    category: "Options",
+    asset: "Calls / Puts (Monthly Exp.)",
+    logic: [
+      "Monitor option Delta in your trading platform.",
+      "Set an exit target when Delta hits 0.75 or 0.80.",
+      "Scale out 50% at Delta 0.70.",
+      "Close the full position when Delta hits the 0.80 threshold."
+    ],
+    psychology: "Ensures you are taking profit when the option's value is behaving like equity—minimizing time decay risk.",
+    stats: { avgProfit: "+45.0%", drawdown: "-15.0%", volatility: "High" }
+  },
+  "vwap-mean-reversion": {
+    title: "VWAP Mean Reversion",
+    description: "For day traders, the VWAP is the 'true price'. When price deviates significantly, it invariably returns to the mean.",
+    winRate: "69%",
+    category: "Day Trading",
+    asset: "Mid-Cap Equities (Intraday)",
+    logic: [
+      "Identify price 2 Standard Deviations from VWAP.",
+      "Watch for volume divergence on the 5-minute chart.",
+      "Exit on the first touch of the Upper/Lower Deviation Band.",
+      "Re-enter only on a VWAP cross."
+    ],
+    psychology: "Keeps day traders anchored to volume-weighted realities, preventing 'chasing' in high-deviation zones.",
+    stats: { avgProfit: "+2.8%", drawdown: "-0.5%", volatility: "Intraday" }
+  },
+  "long-term-secular-trend-exit": {
+    title: "Long Term Secular Trend Exit",
+    description: "Designed for the 'Buy and Hold' investor who needs a systematic way to protect wealth during bear markets.",
+    winRate: "81%",
+    category: "Long-Term",
+    asset: "ETFs / Retirement Portfolios",
+    logic: [
+      "Enable the 200-day Simple Moving Average (SMA).",
+      "Monitor monthly candle closes relative to the 200 SMA.",
+      "Exit 100% on a monthly close below the 200 SMA.",
+      "Re-allocate to cash or hedges until price breaks back above."
+    ],
+    psychology: "Protects multi-year wealth by cutting exposure only during confirmed long-term trend shifts.",
+    stats: { avgProfit: "+120.0% (Cycle)", drawdown: "-5.0% (SMA delay)", volatility: "Low" }
+  },
+  "gap-fill-exhaustion": {
+    title: "Gap Fill Exhaustion",
+    description: "Markets hate gaps. This strategy takes advantage of the 'magnet' effect of old gaps and exits exactly as the hole is filled.",
+    winRate: "76%",
+    category: "Equity",
+    asset: "Large Cap (Pre-market Gaps)",
+    logic: [
+      "Identify a price gap on the daily chart.",
+      "Draw lines at the gap high and gap low.",
+      "Exit immediately when price touches the opposing gap boundary.",
+      "Anticipate a reversal or consolidation at this fill point."
+    ],
+    psychology: "Capitalizes on structural market traps, exiting while momentum is high but the structural gap is closed.",
+    stats: { avgProfit: "+5.3%", drawdown: "-1.1%", volatility: "Medium" }
+  },
+  "volatility-contraction-breakout-exit": {
+    title: "Volatility Contraction Breakout Exit",
+    description: "Catch the explosion after the squeeze. This strategy exits when the expansion hits historical extremes.",
+    winRate: "67%",
+    category: "Swinging",
+    asset: "High-Growth / Momentum Stocks",
+    logic: [
+      "Identify a period of tight Bollinger Band Width.",
+      "Wait for a breakout on high volume.",
+      "Monitor the 'Expansion' of the bands.",
+      "Exit when the Band Width starts to contract from its peak."
+    ],
+    psychology: "Rides the breakout volatility to its max, exiting when the 'squeeze juice' has been fully squeezed out.",
+    stats: { avgProfit: "+18.2%", drawdown: "-3.9%", volatility: "High" }
   }
 };
+
 
 export default async function StrategyPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

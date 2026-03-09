@@ -54,5 +54,55 @@ export const strategies = [
     description: "Trailing exit that tightens during rapid price acceleration.",
     category: "volatility",
     premium: true,
+  },
+  {
+    id: "moving-average-cross-swing",
+    title: "Moving Average Cross Swing",
+    description: "Exit when the 9-period EMA crosses back below the 21-period EMA during an uptrend.",
+    category: "equity",
+    premium: false,
+  },
+  {
+    id: "earnings-run-up-exit",
+    title: "Earnings Run-up Exit",
+    description: "Profit-taking 24-48 hours before the quarterly earnings report to avoid gap-down risk.",
+    category: "stocks",
+    premium: true,
+  },
+  {
+    id: "options-delta-target",
+    title: "Options Delta Target",
+    description: "Automated exit when the delta of your call or put option hits 0.75 - 0.80.",
+    category: "options",
+    premium: true,
+  },
+  {
+    id: "vwap-mean-reversion",
+    title: "VWAP Mean Reversion",
+    description: "Day trading exit based on the Volume Weighted Average Price (VWAP) for intraday targets.",
+    category: "day-trading",
+    premium: false,
+  },
+  {
+    id: "long-term-secular-trend-exit",
+    title: "Long Term Secular Trend Exit",
+    description: "Strategic exit for long-term equity portfolios based on the 200-day Simple Moving Average.",
+    category: "long-term",
+    premium: false,
+  },
+  {
+    id: "gap-fill-exhaustion",
+    title: "Gap Fill Exhaustion",
+    description: "Equity exit at the precise point where a historical chart gap is filled and momentum stalls.",
+    category: "equity",
+    premium: true,
+  },
+  {
+    id: "volatility-contraction-breakout-exit",
+    title: "Volatility Contraction Breakout Exit",
+    description: "Profit-taking when the Bollinger Band Width hits historical extremes during a breakout.",
+    category: "swinging",
+    premium: false,
   }
 ];
+
