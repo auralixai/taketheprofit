@@ -1,10 +1,18 @@
-import { BrainCircuit, ShieldAlert, Target, BarChart3, TrendingUp, Zap, ChevronLeft, Calculator, CheckCircle2, History, ArrowLeft, Info } from "lucide-react";
+import { strategies } from "@/data/strategies";
+
+export async function generateStaticParams() {
+  return strategies.map((strat) => ({
+    slug: strat.id,
+  }));
+}
+
+import { BrainCircuit, ShieldAlert, Target, BarChart3, TrendingUp, Zap, ChevronRight, Calculator, CheckCircle2, History, ArrowLeft, Info } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-// This would typically come from a DB or JSON file
+// Full data mapping for all expanded strategies
 const STRATEGIES_DATA: any = {
-  "rsi-divergence-exit": {
+  "rsi-divergence": {
     title: "RSI Divergence Exit",
     description: "The RSI Divergence Exit strategy is a powerful momentum-based approach used to identify trend exhaustion before a price reversal. By monitoring the Relative Strength Index (RSI) against price action, traders can spot 'hidden' weakness and exit before the majority of the market.",
     winRate: "68%",
@@ -17,11 +25,7 @@ const STRATEGIES_DATA: any = {
       "Exit position immediately on candle close."
     ],
     psychology: "Prevents 'Greed Bias' by providing a technical reason to exit while the market still looks bullish to the untrained eye.",
-    stats: {
-      avgProfit: "+12.4%",
-      drawdown: "-3.2%",
-      volatility: "Medium"
-    }
+    stats: { avgProfit: "+12.4%", drawdown: "-3.2%", volatility: "Medium" }
   },
   "atr-trailing-stop": {
     title: "ATR Trailing Stop",
@@ -36,11 +40,97 @@ const STRATEGIES_DATA: any = {
       "Exit when price touches the ATR boundary."
     ],
     psychology: "Removes the 'Just one more tick' anxiety by automating the exit based on mathematically defined market noise.",
-    stats: {
-      avgProfit: "+8.7%",
-      drawdown: "-1.8%",
-      volatility: "Low-High (Adaptive)"
-    }
+    stats: { avgProfit: "+8.7%", drawdown: "-1.8%", volatility: "Low-High (Adaptive)" }
+  },
+  "bollinger-band-reversal": {
+    title: "Bollinger Band Reversal",
+    description: "This strategy exits a position when price tags the outer Bollinger Bands during extreme volatility expansion. It assumes a return to the mean (the 20-period SMA) after a rapid expansion.",
+    winRate: "64%",
+    category: "Volatility",
+    asset: "Commodities / Stocks",
+    logic: [
+      "Identify a price break outside the Upper Bollinger Band (20, 2).",
+      "Monitor for a reversal candle (Pin bar or engulfing).",
+      "Exit 100% of the position when price closes back inside the band.",
+      "Optional: Scale out 50% on the initial touch."
+    ],
+    psychology: "Provides a rigid exit rule during 'scary' high-volatility spikes, capturing the maximum move before the inevitable pullback.",
+    stats: { avgProfit: "+15.2%", drawdown: "-4.5%", volatility: "High" }
+  },
+  "macd-histogram-exhaustion": {
+    title: "MACD Histogram Exhaustion",
+    description: "MACD Exhaustion exits focus on the 'second derivative' of momentum. When the histogram bars start shrinking, the momentum is fading—even if price is still climbing.",
+    winRate: "71%",
+    category: "Momentum",
+    asset: "Universal / Trend-focused",
+    logic: [
+      "Wait for MACD Histogram to reach a recent 'Peak' height.",
+      "Watch for the first bar that is smaller than the previous one.",
+      "Confirm with volume divergence if possible.",
+      "Exit on the first sign of histogram compression."
+    ],
+    psychology: "Helps traders 'Take The Profit' while the trend is still technically intact, avoiding the deep retracement that follows exhaustion.",
+    stats: { avgProfit: "+9.1%", drawdown: "-2.1%", volatility: "Low" }
+  },
+  "fibonacci-golden-pocket": {
+    title: "Fibonacci Golden Pocket",
+    description: "The 0.618 - 0.65 area is mathematically proven to be the most reactive zone in financial markets. This strategy automates profit taking at this structural 'magnet'.",
+    winRate: "79%",
+    category: "Structure",
+    asset: "Crypto / Major FX Pairs",
+    logic: [
+      "Draw Fib Retracement from recent swing high to swing low.",
+      "Mark the 'Golden Pocket' (0.618 and 0.65 levels).",
+      "Set Take Profit orders slightly below the 0.618 line.",
+      "Monitor for absorption/rejection at this level."
+    ],
+    psychology: "Leverages the self-fulfilling prophecy of institutional algorithms, placing your exits exactly where the 'big money' is selling.",
+    stats: { avgProfit: "+18.4%", drawdown: "-1.5%", volatility: "Medium" }
+  },
+  "volume-climax-exit": {
+    title: "Volume Climax Exit",
+    description: "Volume precedes price. A sudden 'vertical' spike in volume after a prolonged trend often indicates the final retail FOMO entry—making it the perfect exit for smart money.",
+    winRate: "62%",
+    category: "Momentum",
+    asset: "Low-Cap / Growth Stocks",
+    logic: [
+      "Identify volume that is 3x or 4x higher than the 20-day average.",
+      "Confirm price is at a parabolic angle (>45 degrees).",
+      "Exit 75% of the position into the liquidity of the volume spike.",
+      "Move the remainder to a breakeven stop."
+    ],
+    psychology: "Teaches you to sell when everyone else is buying—the hardest but most profitable skill in trading.",
+    stats: { avgProfit: "+28.1%", drawdown: "-7.4%", volatility: "Very High" }
+  },
+  "london-close-liquidity": {
+    title: "London Close Liquidity",
+    description: "Market dynamics shift significantly when the London session closes (around 11:30 AM EST). This time-based exit avoids the 'whipsaw' of liquidity drying up.",
+    winRate: "58%",
+    category: "Timing",
+    asset: "Forex (EUR/USD, GBP/USD)",
+    logic: [
+      "Identify open trades entered during London or NY session.",
+      "Set a hard exit alert for 11:15 AM EST.",
+      "Close positions regardless of PnL if target hasn't been hit.",
+      "Prevents holding through the low-liquidity afternoon lull."
+    ],
+    psychology: "Reduces 'Overtrading' and the risk of turning a winner into a loser during the unpredictable post-London hours.",
+    stats: { avgProfit: "+4.2%", drawdown: "-0.8%", volatility: "Low" }
+  },
+  "parabolic-sar-flip": {
+    title: "Parabolic SAR Flip",
+    description: "The SAR (Stop and Reverse) is a dynamic trailing indicator. This strategy is best used in strong trending markets where you want to ride the wave until the very end.",
+    winRate: "66%",
+    category: "Volatility",
+    asset: "Major Indices (NAS100, SPX)",
+    logic: [
+      "Enable Parabolic SAR indicator (0.02, 0.2).",
+      "Ensure the dots are below the price (in an uptrend).",
+      "Keep the trade open as long as the dots remain below.",
+      "Exit the second a dot appears ABOVE the current price candle."
+    ],
+    psychology: "Provides a purely mechanical exit, silencing the 'hope' of a bounce when the trend has clearly flipped.",
+    stats: { avgProfit: "+11.8%", drawdown: "-2.9%", volatility: "Medium-High" }
   }
 };
 
@@ -61,7 +151,7 @@ export default async function StrategyPage({ params }: { params: Promise<{ slug:
 
         {/* Header Section */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
-          <div>
+          <div className="flex-1">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00FF66]/10 border border-[#00FF66]/20 text-[#00FF66] text-[10px] font-black tracking-widest uppercase mb-4">
               {strategy.category} Strategy
             </div>
@@ -81,7 +171,7 @@ export default async function StrategyPage({ params }: { params: Promise<{ slug:
         <div className="grid md:grid-cols-3 gap-6 mb-12">
            <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
               <div className="text-gray-500 text-[10px] font-black tracking-widest uppercase mb-2">Ideal Asset</div>
-              <div className="font-bold">{strategy.asset}</div>
+              <div className="font-bold text-sm">{strategy.asset}</div>
            </div>
            <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
               <div className="text-gray-500 text-[10px] font-black tracking-widest uppercase mb-2">Avg. Profit Capture</div>
@@ -138,8 +228,8 @@ export default async function StrategyPage({ params }: { params: Promise<{ slug:
                    <Info className="w-4 h-4" /> pSEO Metadata
                  </h3>
                  <div className="space-y-2">
-                    <div className="text-[10px] text-gray-500">TAGS: #ExitStrategy #TradingAI #{strategy.category} #Backtested</div>
-                    <div className="text-[10px] text-gray-500">MODIFIED: {new Date().toLocaleDateString()}</div>
+                    <div className="text-[10px] text-gray-500 uppercase">TAGS: #ExitStrategy #TradingAI #{strategy.category} #Backtested</div>
+                    <div className="text-[10px] text-gray-500 uppercase">MODIFIED: {new Date().toLocaleDateString()}</div>
                  </div>
               </div>
            </div>
