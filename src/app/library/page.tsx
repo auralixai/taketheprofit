@@ -80,21 +80,25 @@ export default function LibraryPage() {
           })}
         </div>
 
-        {/* pSEO Teaser */}
-        <div className="mt-20 p-8 md:p-12 rounded-3xl bg-gradient-to-r from-[#00FF66]/5 to-transparent border border-[#00FF66]/10">
-           <div className="max-w-2xl">
-              <h2 className="text-2xl font-bold mb-4 flex items-center gap-3">
-                <Calculator className="text-[#00FF66]" /> Scaling Exit Library for pSEO
-              </h2>
-              <p className="text-gray-400 text-sm mb-8 leading-relaxed">
-                This library is designed for massive organic growth. Each asset category—Stocks, Options, Equities—serves as a primary landing node for high-intent professional traders.
-              </p>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {["Stocks", "Options", "Equities", "Day Trading"].map((f) => (
-                   <div key={f} className="flex items-center gap-2 text-[10px] font-bold text-gray-300">
-                     <CheckCircle2 className="w-3 h-3 text-[#00FF66]" /> {f}
-                   </div>
-                ))}
+        {/* Call to Action (Replaced Follow Section) */}
+        <div className="mt-20 p-10 md:p-16 rounded-[2.5rem] bg-[#00FF66] text-black relative overflow-hidden shadow-[0_0_50px_rgba(0,255,102,0.2)]">
+           <div className="absolute top-0 right-0 w-96 h-96 bg-black/5 rounded-full blur-3xl -mr-48 -mt-48"></div>
+           <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
+              <div className="max-w-xl text-center md:text-left">
+                 <h2 className="text-4xl md:text-5xl font-black tracking-tighter mb-4 leading-none">
+                    READY TO TAKE<br />THE PROFIT?
+                 </h2>
+                 <p className="text-black/70 font-bold text-lg leading-tight">
+                    Join 5,000+ traders using AI to eliminate greed and master their exits.
+                 </p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+                 <Link href="/pricing" className="px-10 py-5 bg-black text-white font-black rounded-2xl hover:bg-black/80 transition-all text-center flex items-center justify-center gap-3 group">
+                    GET STARTED NOW <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                 </Link>
+                 <Link href="/agent" className="px-10 py-5 bg-transparent border-2 border-black text-black font-black rounded-2xl hover:bg-black/5 transition-all text-center">
+                    LAUNCH FREE AGENT
+                 </Link>
               </div>
            </div>
         </div>
