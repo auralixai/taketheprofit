@@ -10,7 +10,6 @@ export const metadata: Metadata = {
     description: "AI-powered exit strategies for professional traders.",
     url: "https://taketheprofit.com",
     siteName: "Take The Profit",
-    images: [{ url: "/og-image.png" }],
     locale: "en_US",
     type: "website",
   },
